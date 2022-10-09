@@ -13,7 +13,7 @@ export default class NumberValidation extends Validation {
         message: "",
       };
     }
-    return { result: true, message: `must be greater than or equal to ${max}` };
+    return { result: true, message: `must be less than or equal to ${max}` };
   }
 
   static min(num: number, min?: number): IResult {
@@ -26,7 +26,7 @@ export default class NumberValidation extends Validation {
         message: "",
       };
     }
-    return { result: true, message: `must be less than or equal to ${min}` };
+    return { result: true, message: `must be greater than or equal to ${min}` };
   }
 
   static moreThan(num: number, more?: number): IResult {

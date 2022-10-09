@@ -1,5 +1,6 @@
 import Schema from "./schema";
 import BooleanSchema from "./schema/boolean";
+import NumberSchema from "./schema/number";
 import StringSchema from "./schema/string";
 
 export default class CheckValue<T> {
@@ -10,6 +11,10 @@ export default class CheckValue<T> {
 
   static boolean() {
     return new BooleanSchema();
+  }
+
+  static number() {
+    return new NumberSchema();
   }
 
   object(schema: { [Key in keyof T]: Schema }): this {
