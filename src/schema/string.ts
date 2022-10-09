@@ -27,12 +27,12 @@ export default class StringSchema extends Schema {
   }
 
   max(length: number, message = "") {
-    this.rule.push({ method: StringValidation.max, message, length });
+    this.rule.push({ method: StringValidation.max, message, value2: length });
     return this;
   }
 
   min(length: number, message = "") {
-    this.rule.push({ method: StringValidation.min, message, length });
+    this.rule.push({ method: StringValidation.min, message, value2: length });
     return this;
   }
 

@@ -1,12 +1,12 @@
 import { ESchemaName } from "../util";
 import Validation, { IResult } from "../validation";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type IMethod = (value: any, length?: number) => IResult;
+export type IMethod = (value: any, value2?: number) => IResult;
 
 export interface IRule {
   method: IMethod;
   message: string;
-  length?: number;
+  value2?: number;
 }
 
 export interface ISchema {
@@ -18,10 +18,10 @@ export interface ISchema {
 export default class Schema implements ISchema {
   public readonly rule: IRule[] = [];
   constructor(public readonly name: ESchemaName) {}
-  custom(method: IMethod, option: { length?: number; message?: string }): this {
-    const { length, message } = option;
+  custom(method: IMethod, option: { value2?: number; message?: string }): this {
+    const { value2, message } = option;
     const _message = message ? message : "";
-    this.rule.push({ method, message: _message, length });
+    this.rule.push({ method, message: _message, value2 });
     return this;
   }
   required(message = ""): this {

@@ -25,10 +25,10 @@ export default class CheckValue<T> {
       _dat[key] = "";
       if (Object.prototype.hasOwnProperty.call(this._schema, key)) {
         let _message = "";
-        this._schema[key].rule.forEach(({ method, message, length }) => {
-          const result = !length
+        this._schema[key].rule.forEach(({ method, message, value2 }) => {
+          const result = !value2
             ? method(data[key])
-            : method(data[key], length);
+            : method(data[key], value2);
           if (result.result) {
             _message = message !== "" ? message : `${[key]} ${result.message}`;
           }
