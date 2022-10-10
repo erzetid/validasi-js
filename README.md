@@ -1,11 +1,11 @@
-# validasi-js
+# validasi
 
 Library/package untuk memvalidasi objek javascript, mudah, ringan dan sederhana.
 
 ## Installation
 
 ```bash
-  npm i validasi-js
+  npm i validasi
 ```
 
 ## Penggunaan umum
@@ -13,7 +13,7 @@ Library/package untuk memvalidasi objek javascript, mudah, ringan dan sederhana.
 ### Contoh lolos validasi
 
 ```javascript
-import CheckValue from "validasi-js";
+import CheckValue from "validasi";
 
 const schema = {
   nama: CheckValue.string().alpha().max(25),
@@ -40,7 +40,7 @@ console.log(error);
 ### Contoh gagal validasi
 
 ```javascript
-import CheckValue from "validasi-js";
+import CheckValue from "validasi";
 
 const schema = {
   id: CheckValue.string().uuid(),
@@ -62,7 +62,7 @@ console.log(error);
 ### Contoh kustom pesan error
 
 ```javascript
-import CheckValue from "validasi-js";
+import CheckValue from "validasi";
 
 const schema = {
   startup: CheckValue.string().alpha(
@@ -101,7 +101,7 @@ custom(method: IMethod, option: {value2?: number; message?: string;}): this;
 #### Contoh dibawah menggunakan typescript, untuk native kamu bisa menyesuaikannya sendiri
 
 ```typescript
-import CheckValue, { IMethod } from "validasi-js";
+import CheckValue, { IMethod } from "validasi";
 
 const bilanganGanjil: IMethod = (val: any) => {
   if (val % 2 !== 0) {
@@ -126,6 +126,6 @@ console.log(error);
 // { angka: 'angka harus bilangan ganjil' }
 ```
 
-TERIMAKASIH SUDAH MAU MENCOBA `validasi-js`
+TERIMAKASIH SUDAH MAU MENCOBA `validasi`
 
 Mohon saran dan masukannya
