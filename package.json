@@ -1,5 +1,5 @@
 {
-  "name": "validasi-js",
+  "name": "validasi",
   "version": "1.0.1",
   "description": "Library validasi objek javascript bahasa Indonesia",
   "main": "dist/index.js",
