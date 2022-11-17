@@ -1,5 +1,5 @@
-import CheckValue from "../src";
-import { IMethod } from "../src/schema/index";
+import CheckValue from '../src';
+import { IMethod } from '../src/schema';
 
 const typeNumber: IMethod = (val: any) => {
   if (typeof val === "number") {
@@ -11,7 +11,7 @@ const typeNumber: IMethod = (val: any) => {
 describe("Custom method", () => {
   it("is example for good value", () => {
     const _good = new CheckValue<{ price: string }>()
-      .object({ price: CheckValue.string().custom(typeNumber, {}) })
+      .object({ price: CheckValue.custom(typeNumber, {}) })
       .validate({ price: 2000 });
     expect(_good.price).toStrictEqual("");
   });
@@ -19,7 +19,7 @@ describe("Custom method", () => {
   it("is example for bad value", () => {
     const _bad = new CheckValue<{ price: string }>()
       .object({
-        price: CheckValue.string().custom(typeNumber, {
+        price: CheckValue.custom(typeNumber, {
           message: "Harus angka",
         }),
       })
