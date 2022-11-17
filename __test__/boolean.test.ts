@@ -1,7 +1,7 @@
-import CheckValue from "../src";
+import CheckValue from '../src';
 
 const good = { truthy: true, falsy: false, required: false };
-const bad = { truthy: "true", falsy: null, required: undefined };
+const bad = { truthy: false, falsy: true, required: "" };
 const schema = {
   truthy: CheckValue.boolean().truthy(),
   falsy: CheckValue.boolean().falsy(),
@@ -11,7 +11,18 @@ const schema = {
 const _good = new CheckValue<typeof schema>().object(schema).validate(good);
 const _bad = new CheckValue<typeof schema>().object(schema).validate(bad);
 
+const _badSingle = new CheckValue()
+  .object({
+    truthy: CheckValue.boolean(),
+  })
+  .validate({ truthy: null }, true);
+
 describe("Boolean Schema", () => {
+  describe("Result single string", () => {
+    it("must be boolean", () => {
+      expect(_badSingle).toStrictEqual("truthy must be boolean");
+    });
+  });
   describe("Good Value", () => {
     it("is truthy", () => {
       expect(_good.truthy).toStrictEqual("");
@@ -31,7 +42,7 @@ describe("Boolean Schema", () => {
       expect(_bad.falsy).toStrictEqual("falsy must be falsy");
     });
     it("required is required", () => {
-      expect(_bad.required).toStrictEqual("required is required");
+      expect(_bad.required).toStrictEqual("required must be boolean");
     });
   });
 });

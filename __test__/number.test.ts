@@ -1,4 +1,5 @@
-import CheckValue from "../src/app";
+import CheckValue from '../src/app';
+
 const good = {
   max: 659,
   min: 6,
@@ -29,8 +30,16 @@ const schema = {
 
 const _good = new CheckValue<typeof schema>().object(schema).validate(good);
 const _bad = new CheckValue<typeof schema>().object(schema).validate(bad);
+const _badSingle = new CheckValue()
+  .object({ name: CheckValue.number() })
+  .validate({ name: [] }, true);
 
 describe("Number Schema", () => {
+  describe("Result single string", () => {
+    it("must be number", () => {
+      expect(_badSingle).toStrictEqual("name must be number");
+    });
+  });
   describe("Good Value", () => {
     it("is max", () => {
       expect(_good.max).toStrictEqual("");

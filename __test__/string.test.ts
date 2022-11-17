@@ -1,4 +1,4 @@
-import CheckValue from "../src";
+import CheckValue from '../src';
 
 const good = {
   alpha: "Muhammad Andri Fahrizal",
@@ -37,7 +37,16 @@ const schema = {
 const _good = new CheckValue<typeof schema>().object(schema).validate(good);
 const _bad = new CheckValue<typeof schema>().object(schema).validate(bad);
 // const _bad = new CheckValue<typeof good>().object(schema).validate(bad);
+const _badSingle = new CheckValue()
+  .object({ name: CheckValue.string() })
+  .validate({ name: null }, true);
+
 describe("String Schema", () => {
+  describe("Result single string", () => {
+    it("must be string", () => {
+      expect(_badSingle).toStrictEqual("name must be string");
+    });
+  });
   describe("Good Value", () => {
     it("is alpha", () => {
       expect(_good.alpha).toStrictEqual("");
