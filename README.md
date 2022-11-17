@@ -37,7 +37,7 @@ console.log(error);
 // { nama: '', noKTP: '', email: '', password: '' }
 ```
 
-### Contoh gagal validasi
+### Contoh gagal validasi (result objek)
 
 ```javascript
 import CheckValue from "validasi";
@@ -57,6 +57,29 @@ console.log(error);
 
 // hasil
 // { id: 'id must be a valid UUID', lulus: 'lulus must be true' }
+```
+
+### Contoh gagal validasi (result single string)
+
+```javascript
+import CheckValue from "validasi";
+
+const schema = {
+  id: CheckValue.string().uuid(),
+  lulus: CheckValue.boolean().truthy(),
+};
+
+const obj = {
+  id: "WizPCaln6Q",
+  lulus: true,
+};
+
+// Tambahkan {true} pada parameter kedua didalam method {validate(object)}
+const error = new CheckValue().object(schema).validate(obj, true);
+console.log(error);
+
+// hasil
+//  'id must be a valid UUID'
 ```
 
 ### Contoh kustom pesan error
@@ -111,7 +134,7 @@ const bilanganGanjil: IMethod = (val: any) => {
 };
 
 const schema = {
-  angka: CheckValue.number().custom(bilanganGanjil, {}),
+  angka: CheckValue.custom(bilanganGanjil, {}),
 };
 
 const obj = {
