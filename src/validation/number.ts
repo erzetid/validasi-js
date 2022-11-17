@@ -1,8 +1,14 @@
-import Validation from ".";
-import { IResult } from ".";
-import { isNumber } from "../util";
+import Validation, { IResult } from '.';
+import { isNumber } from '../util';
 
 export default class NumberValidation extends Validation {
+  static isNumber(num: number): IResult {
+    if (!isNumber(num)) {
+      return { result: true, message: "must be number" };
+    }
+    return { result: false, message: "" };
+  }
+
   static max(num: number, max?: number): IResult {
     if (!max) {
       throw new Error("Length is required");

@@ -1,8 +1,14 @@
-import { IResult } from ".";
-import Validation from ".";
-import { isString } from "../util";
+import Validation, { IResult } from '.';
+import { isString } from '../util';
 
 export default class StringValidation extends Validation {
+  static isString(str: string): IResult {
+    if (!isString(str)) {
+      return { result: true, message: "must be string" };
+    }
+    return { result: false, message: "" };
+  }
+
   static alpha(str: string): IResult {
     const rAlpha = /^[a-zA-Z() ]+$/.test(str);
     if (rAlpha && isString(str)) {

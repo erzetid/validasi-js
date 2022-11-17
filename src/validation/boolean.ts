@@ -1,7 +1,14 @@
-import Validation, { IResult } from ".";
-import { isBoolean } from "../util";
+import Validation, { IResult } from '.';
+import { isBoolean } from '../util';
 
 export default class BooleanValidation extends Validation {
+  static isBoolean(bool: boolean) {
+    if (!isBoolean(bool)) {
+      return { result: true, message: "must be boolean" };
+    }
+    return { result: false, message: "" };
+  }
+
   static truthy(bool: boolean): IResult {
     if (isBoolean(bool) && bool) {
       return { result: false, message: "" };
@@ -16,7 +23,7 @@ export default class BooleanValidation extends Validation {
   }
   static required(bool: boolean): IResult {
     if (!isBoolean(bool)) {
-      return { result: true, message: "is required" };
+      return { result: true, message: "must be boolean" };
     }
     return { result: false, message: "" };
   }

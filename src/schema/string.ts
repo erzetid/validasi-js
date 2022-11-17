@@ -1,11 +1,13 @@
-import Schema from ".";
-import { ESchemaName } from "../util";
-import StringValidation from "../validation/string";
+import Schema from '.';
+import { ESchemaName } from '../util';
+import StringValidation from '../validation/string';
 
 export default class StringSchema extends Schema {
   constructor() {
     super(ESchemaName.STRING);
+    this.rule.push({ method: StringValidation.isString, message: "" });
   }
+
   alpha(message = "") {
     this.rule.push({ method: StringValidation.alpha, message });
     return this;
