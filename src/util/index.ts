@@ -2,6 +2,7 @@ export enum ESchemaName {
   STRING = "str",
   NUMBER = "num",
   BOOLEAN = "bool",
+  CUSTOM = "custom",
 }
 
 export const isString = (val: string) => typeof val === "string";
