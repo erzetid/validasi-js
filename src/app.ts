@@ -3,6 +3,7 @@ import Schema, { CustomSchema, IMethod } from './schema';
 import BooleanSchema from './schema/boolean';
 import NumberSchema from './schema/number';
 import StringSchema from './schema/string';
+import { checkEnum } from './util';
 
 /**
  * @static method untuk menseting validasi yang akan digunakan pada objek (membuat `schema`)
@@ -42,9 +43,14 @@ export default class CheckValue<T> {
    */
   static custom(
     method: IMethod,
-    option: { value2?: number; message?: string }
+    option: {  message?: string }
   ): CustomSchema {
     return new CustomSchema(method, option);
+  }
+
+  static enumCheck(enumType: { [s: string]: any } | ArrayLike<any>,
+    option: {  message?: string }){
+    return this.custom(checkEnum(enumType), option)
   }
 
   /**
@@ -120,7 +126,7 @@ export default class CheckValue<T> {
           // jika ada yang salah dalam validasi
           if (result.result) {
             // jika custom message kosong
-            _message = message !== "" ? message : `${[key]} ${result.message}`;
+            _message = message !== "" ? message : `${[key]}: ${result.message}`;
             return; // akan memberhentikan looping validasi objek
           }
         });

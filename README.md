@@ -79,7 +79,7 @@ const error = new CheckValue().object(schema).validate(obj, true);
 console.log(error);
 
 // hasil
-//  'id must be a valid UUID'
+//  'id: must be a valid UUID'
 ```
 
 ### Contoh kustom pesan error
@@ -106,6 +106,28 @@ console.log(error);
 //   startup: 'Kolom startup hanya mendukung karakter alfabet.',
 //   website: 'Harap masukan nama website dengan benar'
 // }
+```
+
+### Contoh checkEnum method
+
+```typescript
+enum enumExample {
+  NUMBER = 0,
+  STRING = "string",
+}
+const customMessage = "invalid type!";
+const enumSchema = {
+  number: CheckValue.enumCheck(enumExample, { message: customMessage }),
+  string: CheckValue.enumCheck(enumExample, { message: customMessage }),
+};
+
+const _check = new CheckValue()
+  .object(enumSchema)
+  .validate({ number: 0, string: "string" }, true);
+
+console.log(_check);
+
+// 'invalid type!'
 ```
 
 ### Contoh kustom method
