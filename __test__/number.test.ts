@@ -37,7 +37,7 @@ const _badSingle = new CheckValue()
 describe("Number Schema", () => {
   describe("Result single string", () => {
     it("must be number", () => {
-      expect(_badSingle).toStrictEqual("name must be number");
+      expect(_badSingle).toStrictEqual("name: must be number");
     });
   });
   describe("Good Value", () => {

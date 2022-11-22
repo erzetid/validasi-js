@@ -20,7 +20,7 @@ const _badSingle = new CheckValue()
 describe("Boolean Schema", () => {
   describe("Result single string", () => {
     it("must be boolean", () => {
-      expect(_badSingle).toStrictEqual("truthy must be boolean");
+      expect(_badSingle).toStrictEqual("truthy: must be boolean");
     });
   });
   describe("Good Value", () => {
