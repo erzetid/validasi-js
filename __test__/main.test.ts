@@ -8,29 +8,35 @@ const typeNumber: IMethod = (val: any) => {
   return { result: true, message: "the type is no number" };
 };
 
-enum enumExample{
-  NUMBER=0,
-  STRING='string'
+enum enumExample {
+  NUMBER = 0,
+  STRING = "string",
 }
-const enumMessage = 'invalid type!';
-const enumSchema ={
-  number:CheckValue.enumCheck(enumExample,{message:enumMessage}),
-  string:CheckValue.enumCheck(enumExample,{message:enumMessage})
-}
+const enumMessage = "invalid type!";
+const enumSchema = {
+  number: CheckValue.enumCheck(enumExample, { message: enumMessage }),
+  string: CheckValue.enumCheck(enumExample, { message: enumMessage }),
+};
 
-describe('Check enum', () => { 
-  it('Check is fail ❎ validation' , () => {
-    const _bad1 = new CheckValue().object(enumSchema).validate({number:false, string:'string'}, true)
-    const _bad2 = new CheckValue().object(enumSchema).validate({number:0, string:[]}, true)
-    expect(_bad1).toStrictEqual('invalid type!')
-    expect(_bad2).toStrictEqual('invalid type!')
+describe("Check enum", () => {
+  it("Check is fail ❎ validation", () => {
+    const _bad1 = new CheckValue()
+      .object(enumSchema)
+      .validate({ number: false, string: "string" }, true);
+    const _bad2 = new CheckValue()
+      .object(enumSchema)
+      .validate({ number: 0, string: [] }, true);
+    expect(_bad1).toStrictEqual("invalid type!");
+    expect(_bad2).toStrictEqual("invalid type!");
   });
-  
-  it('Check is pass ✅ validation' , () => {
-    const _good = new CheckValue().object(enumSchema).validate({number:0, string:'string'}, true)
-    expect(_good).toStrictEqual('')
+
+  it("Check is pass ✅ validation", () => {
+    const _good = new CheckValue()
+      .object(enumSchema)
+      .validate({ number: 0, string: "string" }, true);
+    expect(_good).toStrictEqual("");
   });
- })
+});
 
 describe("Custom method", () => {
   it("is example for good value", () => {
@@ -49,5 +55,25 @@ describe("Custom method", () => {
       })
       .validate({ price: "2000" });
     expect(_bad.price).toStrictEqual("Harus angka");
+  });
+});
+
+describe("Check is undefined in schema", () => {
+  it("Is defined", () => {
+    const good = new CheckValue()
+      .object(enumSchema)
+      .validate({ number: 0, string: "string" });
+    expect(good).toMatchObject({ string: "", number: "" });
+  });
+
+  it("Is undefined", () => {
+    const _bad = new CheckValue()
+      .object(enumSchema)
+      .validate({ number: 0, string: "string", undefined: "" });
+    expect(_bad).toMatchObject({
+      string: "",
+      number: "",
+      undefined: "not defined in schema",
+    });
   });
 });
