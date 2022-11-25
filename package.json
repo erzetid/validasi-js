@@ -1,6 +1,6 @@
 {
   "name": "validasi",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "Library validasi objek javascript bahasa Indonesia",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
