@@ -80,6 +80,7 @@ export default class CheckValue<T> {
    */
   validate(data: { [Key in keyof T]: any }, isString: boolean): string;
 
+  // ~TODO: Ringkas ini validate single
   validate(
     data: { [Key in keyof T]: any },
     isString?: boolean
@@ -131,6 +132,7 @@ export default class CheckValue<T> {
           }
         });
       } else {
+        // Jika ada data (key) yang tidak ada dalam schema
         _message = `${[key]}: not defined in schema`;
       }
     }
