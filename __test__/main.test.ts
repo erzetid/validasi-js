@@ -1,4 +1,4 @@
-import CheckValue from '../src';
+import CheckValue, { validationSubmit } from '../src';
 import { IMethod } from '../src/schema';
 
 const typeNumber: IMethod = (val: any) => {
@@ -75,5 +75,22 @@ describe("Check is undefined in schema", () => {
       number: "",
       undefined: "not defined in schema",
     });
+  });
+});
+
+describe("validationSubmit()", () => {
+  it("Should return true", () => {
+    const good = new CheckValue()
+      .object(enumSchema)
+      .validate({ number: 0, string: "string" });
+
+    expect(validationSubmit(good)).toBeTruthy()
+  });
+
+  it("Should return false", () => {
+    const _bad = new CheckValue()
+      .object(enumSchema)
+      .validate({ number: 0, string: "string", undefined: "" });
+    expect(validationSubmit(_bad)).toBeFalsy()
   });
 });
