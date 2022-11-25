@@ -41,16 +41,15 @@ export default class CheckValue<T> {
    * @static Membuat `schema` validasi custom
    * @returns {CustomSchema}
    */
-  static custom(
-    method: IMethod,
-    option: {  message?: string }
-  ): CustomSchema {
+  static custom(method: IMethod, option: { message?: string }): CustomSchema {
     return new CustomSchema(method, option);
   }
 
-  static enumCheck(enumType: { [s: string]: any } | ArrayLike<any>,
-    option: {  message?: string }){
-    return this.custom(checkEnum(enumType), option)
+  static enumCheck(
+    enumType: { [s: string]: any } | ArrayLike<any>,
+    option: { message?: string }
+  ) {
+    return this.custom(checkEnum(enumType), option);
   }
 
   /**
@@ -92,8 +91,8 @@ export default class CheckValue<T> {
     const _dat = { ...data };
     for (key in data) {
       _dat[key] = "";
+      let _message = "";
       if (Object.prototype.hasOwnProperty.call(this._schema, key)) {
-        let _message = "";
         this._schema[key].rule.forEach(({ method, message, value2 }) => {
           const result = !value2
             ? method(data[key])
@@ -104,9 +103,10 @@ export default class CheckValue<T> {
             _message = message !== "" ? message : `${[key]} ${result.message}`;
           }
         });
-
-        _dat[key] = _message;
+      } else {
+        _message = `not defined in schema`;
       }
+      _dat[key] = _message;
     }
     return _dat;
   }
@@ -130,6 +130,8 @@ export default class CheckValue<T> {
             return; // akan memberhentikan looping validasi objek
           }
         });
+      } else {
+        _message = `${[key]}: not defined in schema`;
       }
     }
     return _message;
